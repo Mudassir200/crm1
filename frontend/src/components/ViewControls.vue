@@ -248,14 +248,7 @@
   <Dialog
     v-model="showExportDialog"
     :options="{
-      title: __('Export'),
-      actions: [
-        {
-          label: __('Download'),
-          variant: 'solid',
-          onClick: () => exportRows(),
-        },
-      ],
+      title: __('Export')
     }"
   >
     <template #body-content>
@@ -283,6 +276,11 @@
           v-model="export_all"
         />
       </div>
+    </template>
+    <template #actions>
+      <Button class="w-full" variant="solid" @click="exportRows" :disabled="export_all || selectedRows.length ? false : true">
+        Download
+      </Button>
     </template>
   </Dialog>
 </template>
