@@ -740,6 +740,7 @@ function saveQuickFilters() {
 }
 
 const quickFilterOptions = computed(() => {
+  let existingQuickFilters = newQuickFilters.value.map((f) => f.fieldname)
   let fields = getFields()
   if (!fields) return []
 
@@ -757,6 +758,7 @@ const quickFilterOptions = computed(() => {
   ]
   let options = fields
     .filter((f) => f.label && !restrictedFieldtypes.includes(f.fieldtype))
+    .filter((f) => !existingQuickFilters.includes(f.fieldname))
     .map((field) => ({
       label: field.label,
       value: field.fieldname,
